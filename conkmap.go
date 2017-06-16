@@ -18,13 +18,14 @@ func New() ConkMap {
 }
 
 // Get data at key
-func (c *ConkMap) At(key interface{}) interface{} {
+func (c *ConkMap) Get(key interface{}) interface{} {
 
 	c.lock.RLock()
 	ret:=c.data[key]
 	c.lock.RUnlock()
 	return ret
 }
+
 
 // Set key-data pair
 func (c *ConkMap) Set(key interface{}, data interface{}) error {
@@ -41,3 +42,13 @@ func (c *ConkMap) Set(key interface{}, data interface{}) error {
 		return nil
 	}
 }
+
+// Is the map initiated
+func (c *ConkMap) Initiated() bool {
+	if c.data == nil {
+		return true 
+	} else {
+		return false
+	}
+}
+
